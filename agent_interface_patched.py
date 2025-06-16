@@ -19,7 +19,7 @@ from langchain_community.callbacks.context_callback import ContextCallbackHandle
 from langchain_core.messages import AIMessage, HumanMessage
 
 load_dotenv()
-CONTEXT_API_TOKEN = os.getenv("CONTEXT_API_TOKEN", "dummy")
+CONTEXT_API_TOKEN = st.secrets("CONTEXT_API_TOKEN", "dummy")
 context_callback = ContextCallbackHandler(CONTEXT_API_TOKEN)
 
 AZURE_CONFIG = {
@@ -28,10 +28,10 @@ AZURE_CONFIG = {
     "openai_api_base": "https://blink-sentence-similarity.openai.azure.com/",
     "openai_api_version": "2024-02-15-preview",
     "deployment_name": "gpt-4o-mini",
-    "openai_api_key": os.getenv("AZURE_OPENAI_API_KEY"),
+    "openai_api_key": st.secrets("AZURE_OPENAI_API_KEY"),
 }
 MODEL_API_ENDPOINT = "http://previsionapi.blinkpharmacie.ma/predict"
-PHARMACY_ID = os.getenv("PHARMACY_ID", "PHM_DEFAULT")
+PHARMACY_ID = st.secrets("PHARMACY_ID", "PHM_DEFAULT")
 
 class SalesPredictionInput(BaseModel):
     current_ca: float = Field(description="Le chiffre d'affaires actuel de la pharmacie en MAD")
